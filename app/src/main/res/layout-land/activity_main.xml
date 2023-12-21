@@ -38,14 +38,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prev_button"
-            android:layout_gravity="bottom|left" />
+            android:layout_gravity="bottom|start" />
 
         <Button
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/next_button"
-            android:layout_gravity="bottom|right"/>
+            android:layout_gravity="bottom|end"/>
 
 
 
