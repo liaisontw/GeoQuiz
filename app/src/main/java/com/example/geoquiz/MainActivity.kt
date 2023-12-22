@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 private const val TAG ="MainActivity"
+private const val KEY_INDEX = "index"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var trueButton: Button
@@ -43,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         //quizViewModel = ViewModelProvider(this).get(QuizViewModel::class.java)
         //Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
+        val currentIndex = savedInstanceState?.getInt(KEY_INDEX, 0) ?: 0
+        Log.d(TAG, "KEY_INDEX: $KEY_INDEX")
+        quizViewModel.currentIndex = currentIndex
 
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
@@ -64,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         prevButton.setOnClickListener {
-            quizViewModel.moveToNext()
+            quizViewModel.moveToPrev()
             updateQuestion()
         }
 
@@ -104,6 +108,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onPause() called")
     }
 
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        Log.i(TAG, "savedInstanceState")
+        savedInstanceState.putInt(KEY_INDEX, quizViewModel.currentIndex)
+    }
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop() called")
